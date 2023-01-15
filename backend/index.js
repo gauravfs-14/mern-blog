@@ -13,6 +13,7 @@ app.use(cookieParser());
 //routes
 app.use("/api/user", require("./routes/user.routes"));
 app.use("/api/author", require("./routes/author.routes"));
+app.use("/api/category", require("./routes/category.routes"));
 
 mongoose.set("strictQuery", false);
 mongoose
