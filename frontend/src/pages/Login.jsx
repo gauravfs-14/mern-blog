@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
 
 const Login = () => {
+  const { isLogin, setIsLogin } = useContext(UserContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    isLogin ? navigate("/") : null;
+  }, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     setErrorText("");
     e.preventDefault();
     if (!email || !password) {
@@ -14,6 +21,25 @@ const Login = () => {
     if (password.length < 8) {
       setErrorText("Password must be at least 8 characters");
       return false;
+    }
+    const response = await fetch("http://localhost:8080/api/user/login", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    if (response.status == 200) {
+      setIsLogin(true);
+      window.localStorage.setItem("isLogin", true);
+      navigate("/");
+    }
+    const res = await response.json();
+    if (res.message) {
+      setErrorText(res.message);
     }
   };
   return (
