@@ -5,7 +5,7 @@ const cors = require("cors");
 const { default: mongoose } = require("mongoose");
 const cookieParser = require("cookie-parser");
 
-//required middlewares
+//required middleware
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
