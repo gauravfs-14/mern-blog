@@ -3,6 +3,7 @@ const userModels = require("../models/user.models");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const authenticate = require("../middlewares/auth.login");
 
 router.post("/signup", async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
@@ -71,6 +72,10 @@ router.get("/logout", (req, res) => {
       httpOnly: true,
     })
     .send();
+});
+
+router.get("/status", authenticate, (req, res) => {
+  return res.send();
 });
 
 module.exports = router;

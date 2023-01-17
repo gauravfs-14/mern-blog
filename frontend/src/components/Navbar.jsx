@@ -6,6 +6,7 @@ import UserContext from "../contexts/UserContext";
 const Navbar = () => {
   const [mobileNav, setMobileNav] = useState("hidden");
   const { isLogin, logout } = useContext(UserContext);
+  console.log(isLogin);
   return (
     <>
       <nav className="w-screen h-[60px] flex justify-between px-5 items-center bg-gray-200">
@@ -34,15 +35,19 @@ const Navbar = () => {
           >
             Categories
           </li>
-          {isLogin ? (
-            <li
-              onClick={() => {
-                logout();
-                setMobileNav(mobileNav == "hidden" ? "flex" : "hidden");
-              }}
-            >
-              Logout
-            </li>
+          {isLogin && isLogin == true ? (
+            <>
+              <Link to={"dashboard"}>Dashboard</Link>
+              <li
+                onClick={() => {
+                  logout();
+                  setMobileNav(mobileNav == "hidden" ? "flex" : "hidden");
+                }}
+                className="cursor-pointer"
+              >
+                Logout
+              </li>
+            </>
           ) : (
             <Link
               to="login"

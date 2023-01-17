@@ -4,7 +4,10 @@ export const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(
-    window.localStorage.getItem("isLogin") || false
+    window.localStorage.getItem("isLogin") &&
+      window.localStorage.getItem("isLogin") == true
+      ? true
+      : false
   );
   const [userInfo, setUserInfo] = useState(null);
 
@@ -12,7 +15,8 @@ export const UserContextProvider = ({ children }) => {
     fetch("http://localhost:8080/api/user/logout").then((res) => {
       setIsLogin(false);
       setUserInfo(null);
-      window.localStorage("isLogin", false);
+      window.localStorage.removeItem("isLogin");
+      window.localStorage.setItem("isLogin", false);
     });
   };
 

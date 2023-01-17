@@ -6,7 +6,7 @@ const Login = () => {
   const { isLogin, setIsLogin } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
-    isLogin ? navigate("/") : null;
+    isLogin && isLogin == true ? navigate("/") : null;
   }, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
