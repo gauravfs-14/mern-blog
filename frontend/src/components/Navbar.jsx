@@ -6,7 +6,6 @@ import UserContext from "../contexts/UserContext";
 const Navbar = () => {
   const [mobileNav, setMobileNav] = useState("hidden");
   const { isLogin, logout } = useContext(UserContext);
-  console.log(isLogin);
   return (
     <>
       <nav className="w-screen h-[60px] flex justify-between px-5 items-center bg-gray-200">
@@ -35,7 +34,7 @@ const Navbar = () => {
           >
             Categories
           </li>
-          {isLogin && isLogin == true ? (
+          {isLogin === true ? (
             <>
               <Link to={"dashboard"}>Dashboard</Link>
               <li

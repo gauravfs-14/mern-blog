@@ -14,6 +14,7 @@ app.use(cookieParser());
 app.use("/api/user", require("./routes/user.routes"));
 app.use("/api/author", require("./routes/author.routes"));
 app.use("/api/category", require("./routes/category.routes"));
+app.use("/api/post", require("./routes/post.routes"));
 
 mongoose.set("strictQuery", false);
 mongoose
