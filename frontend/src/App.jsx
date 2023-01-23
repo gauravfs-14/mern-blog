@@ -6,6 +6,9 @@ import Login from "./pages/Login";
 import UserContext from "./contexts/UserContext";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/404";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 const App = () => {
   const { isLogin } = useContext(UserContext);
